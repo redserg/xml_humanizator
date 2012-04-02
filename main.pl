@@ -50,8 +50,7 @@ sub process_textpart {
 
 sub process_filepart{	
 	if($q->param('file_button')){
-		print $q->h1('processed file');
-		print $q->param('uploaded_file'), $q->p;
+		
 
 		my $lightweight_fh  = $q->upload('uploaded_file');
 
@@ -65,11 +64,17 @@ sub process_filepart{
     		while ($bytesread = $io_handle->read($buffer,1024)) {
     			$file_as_string.=$buffer;
  	   		}
+ 	   		print $q->h1('processed file');
+			print $q->param('uploaded_file'), $q->p;
+ 	   		# print YAML::Dump(XML::Simple::XMLin($file_as_string));
  	   		print $file_as_string;
+  		}
+  		else{
+  			print  "file error 1";
+  			die "file error 1";
   		}
 
 		
-		# print YAML::Dump(XML::Simple::XMLin($q->param("textarea_input")));
 	}
 }
 
